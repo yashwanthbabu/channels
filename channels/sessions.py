@@ -78,7 +78,7 @@ def channel_session(func):
             return func(*args, **kwargs)
         finally:
             # Persist session if needed
-            if session.modified and not session.is_empty():
+            if session.modified and session._session_key and session._session_cache:
                 session.save()
     return inner
 
